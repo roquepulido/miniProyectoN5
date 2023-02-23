@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
+use Str;
+use Hash;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Auth;
 
 class SessionsController extends Controller
 {
@@ -20,33 +19,15 @@ class SessionsController extends Controller
 
     public function store()
     {
-
         $attributes = request()->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-
         if (!auth()->attempt($attributes)) {
             throw ValidationException::withMessages([
                 'email' => 'Your provided credentials could not be verified.'
             ]);
-        }
-
-        switch (auth()->user()->rol) {
-            case 1:
-                auth()->user()->assignRole('Administrador');
-                break;
-            case 2:
-                auth()->user()->assignRole('Maestro');
-                break;
-            case 3:
-                auth()->user()->assignRole('Alumno');
-                break;
-
-            default:
-                # code...
-                break;
         }
 
         session()->regenerate();

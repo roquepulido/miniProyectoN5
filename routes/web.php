@@ -14,16 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
-            
 
-Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
+Route::get('/home', function () {
+	return view('welcome');
+});
+Route::get('/', function () {
+	return redirect('sign-in');
+})->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::get('sign-up', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 Route::post('sign-up', [RegisterController::class, 'store'])->middleware('guest');
@@ -33,7 +37,7 @@ Route::post('verify', [SessionsController::class, 'show'])->middleware('guest');
 Route::post('reset-password', [SessionsController::class, 'update'])->middleware('guest')->name('password.update');
 Route::get('verify', function () {
 	return view('sessions.password.verify');
-})->middleware('guest')->name('verify'); 
+})->middleware('guest')->name('verify');
 Route::get('/reset-password/{token}', function ($token) {
 	return view('sessions.password.reset', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
@@ -69,4 +73,22 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('user-profile', function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
+});
+Route::group(['middleware' => ['role:Administrador']], function () {
+	//rutas accesibles solo para clientes
+	Route::get('test1', function () {
+		return view('test')->with(['name' => 'Administrador']);
+	})->name('testadmin');
+});
+Route::group(['middleware' => ['role:Maestro']], function () {
+	//rutas accesibles solo para clientes
+	Route::get('test1', function () {
+		return view('test')->with(['name' => 'Maestro']);
+	})->name('testmaestro');
+});
+Route::group(['middleware' => ['role:Alumno']], function () {
+	//rutas accesibles solo para clientes
+	Route::get('test1', function () {
+		return view('test')->with(['name' => 'Alumno']);
+	})->name('testalumno');
 });
