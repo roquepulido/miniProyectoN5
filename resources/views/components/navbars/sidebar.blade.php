@@ -8,14 +8,70 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('dashboard') }} ">
             <img src="{{ asset('assets') }}/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-2 font-weight-bold text-white">Material Dashboard 2 Laravel</span>
+            <span class="ms-2 font-weight-bold text-white">Universidad</span>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
+    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
+        Perfil - -
+        @role("admin")
+        Administrador
+        @endrole
+        @role("teacher")
+        Maestro
+        @endrole
+        @role("student")
+        Estudiante
+        @endrole
+    </h6>
+    <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
+            @role('admin')
             <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Laravel examples</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Menu Administración
+                </h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'admin-permisos' ? 'active bg-gradient-primary' : '' }} "
+                    href="{{ route('admin-permisos') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="font-size: 1.2rem;" class="bi bi-person-fill-gear ps-2 pe-2 text-center"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Permisos</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'admin-maestros' ? 'active bg-gradient-primary' : '' }} "
+                    href="{{ route('admin-maestros') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="font-size: 1.2rem;" class="bi bi-person-workspace ps-2 pe-2 text-center"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Maestros</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'admin-alumnos' ? 'active bg-gradient-primary' : '' }} "
+                    href="{{ route('admin-alumnos') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="font-size: 1.2rem;" class="bi bi-mortarboard-fill ps-2 pe-2 text-center"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Alumnos</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'admin-clases' ? 'active bg-gradient-primary' : '' }} "
+                    href="{{ route('admin-clases') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="font-size: 1.2rem;" class="bi bi-easel2 ps-2 pe-2 text-center"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Clases</span>
+                </a>
+            </li>
+            @endrole
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Laravel examples
+                </h6>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'user-profile' ? 'active bg-gradient-primary' : '' }} "
@@ -124,14 +180,17 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">
-            <a class="btn bg-gradient-primary w-100" href="https://www.creative-tim.com/product/material-dashboard-laravel" target="_blank">Free Download</a>
+            <a class="btn bg-gradient-primary w-100"
+                href="https://www.creative-tim.com/product/material-dashboard-laravel" target="_blank">Free Download</a>
         </div>
         <div class="mx-3">
-            <a class="btn bg-gradient-primary w-100" href="../../documentation/getting-started/installation.html" target="_blank">View documentation</a>
+            <a class="btn bg-gradient-primary w-100" href="../../documentation/getting-started/installation.html"
+                target="_blank">View documentation</a>
         </div>
         <div class="mx-3">
             <a class="btn bg-gradient-primary w-100"
-                href="https://www.creative-tim.com/product/material-dashboard-pro-laravel" target="_blank" type="button">Upgrade
+                href="https://www.creative-tim.com/product/material-dashboard-pro-laravel" target="_blank"
+                type="button">Upgrade
                 to pro</a>
         </div>
     </div>
