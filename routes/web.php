@@ -87,3 +87,18 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 		return view('admin.clases');
 	})->name('admin-clases');
 });
+
+Route::group(['middleware' => ['auth', 'role:teacher']], function () {
+	Route::get('maestro-alumno', function () {
+		return view('maestros.alumnos');
+	})->name('maestro-alumno');
+});
+
+Route::group(['middleware' => ['auth', 'role:student']], function () {
+	Route::get('alumno-calificaciones', function () {
+		return view('estudiantes.calificaciones');
+	})->name('alumno-calificaciones');
+	Route::get('alumno-clases', function () {
+		return view('estudiantes.clases');
+	})->name('alumno-clases');
+});
