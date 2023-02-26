@@ -15,7 +15,8 @@ class StudentsController extends Controller
     public function index()
     {
         $students = Student::leftJoin('carreras', 'students.carrera_id', '=', 'carreras.id')
-            ->select('students.*', 'carreras.name')
+            ->leftJoin('users', 'students.user_id', '=', 'users.id')
+            ->select('students.*', 'carreras.name', 'users.email')
             ->get();
         return view('admin.alumnos')
             ->with('alumnos', $students);
@@ -28,7 +29,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.alumnos.create");
     }
 
     /**

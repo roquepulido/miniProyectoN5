@@ -21,7 +21,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
-
+use App\Http\Controllers\StudentsController;
 
 Route::get('/', function () {
 	return redirect('sign-in');
@@ -74,16 +74,27 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
-	Route::resource('admin_alumnos', "App\Http\Controllers\StudentsController");
+
+	// rutas para edicion de estudiantes
+	Route::controller(StudentsController::class)->group(function () {
+		Route::get("/admin-alumnos", 'index')->name('admin-alumnos');
+		Route::get("/admin-alumnos/create", 'create')->name('admin-alumno-create');
+		// Route::post("/product", 'store');
+		// Route::get("/product/{id}", 'show');
+		// Route::put("/product/{id}", 'update');
+		// Route::delete("/product/{id}", 'index');
+	});
+
 	Route::get('admin-permisos', function () {
 		return view('admin.permisos');
 	})->name('admin-permisos');
 	Route::get('admin-maestros', function () {
 		return view('admin.maestros');
 	})->name('admin-maestros');
-	Route::get('admin-alumnos', function () {
-		return view('admin.alumnos');
-	})->name('admin-alumnos');
+	// Route::get(
+	// 	'admin-alumnos',
+	// 	"App\Http\Controllers\StudentsController::index"
+	// )->name('admin-alumnos');
 	Route::get('admin-clases', function () {
 		return view('admin.clases');
 	})->name('admin-clases');

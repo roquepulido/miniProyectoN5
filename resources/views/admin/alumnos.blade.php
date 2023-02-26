@@ -12,13 +12,11 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Lista de Alumnos</h6>
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex align-items-center justify-content-between">
+                                <h6 class="text-white text-capitalize ps-3">Lista de Alumnos</h6> <a class="btn bg-gradient-dark text-white text-capitalize me-3" href="{{route('admin-alumno-create')}}">Nuevo
+                                    Alumno</a>
                             </div>
                         </div>
-                        @php
-                        var_dump($alumnos)
-                        @endphp
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
@@ -49,7 +47,7 @@
                                                         <h6 class="mb-0 text-sm">{{$alumno->first_name}}
                                                             {{$alumno->last_name}}
                                                         </h6>
-                                                        <p class="text-xs text-secondary mb-0">john@creative-tim.com
+                                                        <p class="text-xs text-secondary mb-0">{{$alumno->email}}
                                                         </p>
                                                     </div>
                                                 </div>
