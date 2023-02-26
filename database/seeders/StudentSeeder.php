@@ -15,7 +15,7 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        Student::factory(10)->create();
+        Student::factory(20)->create();
 
         // $factory->define(App\Post::class, function ($faker) {
         //     return [
