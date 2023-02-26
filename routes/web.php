@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
+	Route::resource('admin_alumnos', "App\Http\Controllers\StudentsController");
 	Route::get('admin-permisos', function () {
 		return view('admin.permisos');
 	})->name('admin-permisos');

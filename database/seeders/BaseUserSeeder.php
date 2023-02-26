@@ -20,7 +20,7 @@ class BaseUserSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@admin',
                 'email_verified_at' => now(),
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'password' => ('admin'), // password
             ]
         );
         $user->assignRole('admin');
@@ -30,7 +30,7 @@ class BaseUserSeeder extends Seeder
                 'name' => 'teacher',
                 'email' => 'teacher@teacher',
                 'email_verified_at' => now(),
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'password' => ('teacher'), // password
             ]
         );
         $user->assignRole('teacher');
@@ -40,7 +40,7 @@ class BaseUserSeeder extends Seeder
                 'name' => 'student',
                 'email' => 'student@student',
                 'email_verified_at' => now(),
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'password' => ('student'), // password
             ]
         );
         $user->assignRole('student');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\student;
+use App\Models\Student;
 
 class StudentsController extends Controller
 {
@@ -14,7 +14,11 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::leftJoin('carreras', 'students.carrera_id', '=', 'carreras.id')
+            ->select('students.*', 'carreras.name')
+            ->get();
+        return view('admin.alumnos')
+            ->with('alumnos', $students);
     }
 
     /**
