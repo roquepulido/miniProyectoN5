@@ -22,6 +22,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\TeachersController;
 
 Route::get('/', function () {
 	return redirect('sign-in');
@@ -78,19 +79,28 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 	// rutas para edicion de estudiantes
 	Route::controller(StudentsController::class)->group(function () {
 		Route::get("/admin-alumnos", 'index')->name('admin-alumnos');
-		Route::get("/admin-alumnos/create", 'create')->name('admin-alumno-create');
-		Route::post("/admin-alumnos/create", 'store')->name('admin-alumno-create');
+		Route::get("/admin-alumno/create", 'create')->name('admin-alumno-create');
+		Route::post("/admin-alumno/create", 'store')->name('admin-alumno-create');
 		Route::get("/admin-alumno-edit/{id}", 'show');
 		Route::put("/admin-alumno-edit", 'update')->name("admin-alumno-edit");
 		Route::get("/admin-alumno-delete/{id}", 'destroy');
+	});
+	// rutas para edicion de Maestros
+	Route::controller(TeachersController::class)->group(function () {
+		Route::get("/admin-maestros", 'index')->name('admin-maestros');
+		Route::get("/admin-maestro/create", 'create')->name('admin-maestro-create');
+		Route::post("/admin-maestro/create", 'store')->name('admin-maestro-create');
+		Route::get("/admin-maestro-edit/{id}", 'show');
+		Route::put("/admin-maestro-edit", 'update')->name("admin-maestro-edit");
+		Route::get("/admin-maestro-delete/{id}", 'destroy');
 	});
 
 	Route::get('admin-permisos', function () {
 		return view('admin.permisos');
 	})->name('admin-permisos');
-	Route::get('admin-maestros', function () {
-		return view('admin.maestros');
-	})->name('admin-maestros');
+	// Route::get('admin-maestros', function () {
+	// 	return view('admin.maestros');
+	// })->name('admin-maestros');
 	// Route::get(
 	// 	'admin-alumnos',
 	// 	"App\Http\Controllers\StudentsController::index"

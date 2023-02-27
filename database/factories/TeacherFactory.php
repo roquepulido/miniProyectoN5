@@ -28,7 +28,7 @@ class TeacherFactory extends Factory
             'last_name' => fake()->lastName(),
             'address' => fake()->address(),
             'birth_date' => fake()->dateTimeBetween('1990-01-01', '2012-12-31')
-                ->format('d/m/Y'),
+                ->format('Y-m-d'),
 
         ];
     }
