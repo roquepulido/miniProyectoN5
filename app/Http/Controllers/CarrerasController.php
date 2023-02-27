@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCarrerasRequest;
 use App\Http\Requests\UpdateCarrerasRequest;
 use App\Models\Carreras;
+use App\Models\Clases;
+use Illuminate\Http\Request;
 
 class CarrerasController extends Controller
 {
@@ -16,7 +18,7 @@ class CarrerasController extends Controller
     public function index()
     {
         $carreras = Carreras::all();
-        return $carreras;
+        return view("admin.carreras.index")->with("carreras", $carreras);
     }
 
     /**
@@ -24,9 +26,10 @@ class CarrerasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($request)
+    public function create()
     {
-        $carrera = new Carreras;
+        $materias = Clases::all();
+        return view("admin.carreras.create")->with("materias", $materias);
     }
 
     /**
@@ -35,10 +38,17 @@ class CarrerasController extends Controller
      * @param  \App\Http\Requests\StoreCarrerasRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCarrerasRequest $request)
+    public function store(Request $request)
     {
-        //
+
+        Carreras::create([
+            "name" => $request->name,
+            "description" => $request->description,
+
+        ]);
+        return redirect('admin-carreras')->with('status', 'Carrera Creada!');
     }
+
 
     /**
      * Display the specified resource.
@@ -46,9 +56,10 @@ class CarrerasController extends Controller
      * @param  \App\Models\Carreras  $carreras
      * @return \Illuminate\Http\Response
      */
-    public function show(Carreras $carreras)
+    public function show($id)
     {
-        //
+        $carrera = Carreras::find($id);
+        return view("admin.carreras.update")->with('carrera', $carrera);
     }
 
     /**
@@ -69,9 +80,14 @@ class CarrerasController extends Controller
      * @param  \App\Models\Carreras  $carreras
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCarrerasRequest $request, Carreras $carreras)
+    public function update(Request $request)
     {
-        //
+        $carrera = Carreras::find($request->id);
+
+        $carrera->name = $request->name;
+        $carrera->description = $request->description;
+        $carrera->save();
+        return redirect('admin-carreras')->with('status', 'Carrera Actializada!');
     }
 
     /**
@@ -80,8 +96,10 @@ class CarrerasController extends Controller
      * @param  \App\Models\Carreras  $carreras
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Carreras $carreras)
+    public function destroy($id)
     {
-        //
+        $carrera = Carreras::find($id);
+        $carrera->delete();
+        return redirect('admin-carreras')->with('status', 'Carrera Borrada!');
     }
 }

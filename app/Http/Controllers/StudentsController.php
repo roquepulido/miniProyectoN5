@@ -122,6 +122,6 @@ class StudentsController extends Controller
         $user = User::find($student->user_id);
         $student->delete();
         $user->delete();
-        return redirect('admin-alumnos')->with('status', 'Estudiante Elimonado!');
+        return redirect('admin-alumnos')->with('status', 'Estudiante Elinado!');
     }
 }

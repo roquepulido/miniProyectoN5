@@ -54,6 +54,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'admin-carreras' ? 'active bg-gradient-primary' : '' }} " href="{{ route('admin-carreras') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="font-size: 1.2rem;" class="bi bi-briefcase-fill ps-2 pe-2 text-center"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Carreras</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'admin-clases' ? 'active bg-gradient-primary' : '' }} " href="{{ route('admin-clases') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1.2rem;" class="bi bi-easel2 ps-2 pe-2 text-center"></i>

@@ -23,6 +23,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\TeachersController;
+use App\Http\Controllers\CarrerasController;
 
 Route::get('/', function () {
 	return redirect('sign-in');
@@ -94,7 +95,15 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 		Route::put("/admin-maestro-edit", 'update')->name("admin-maestro-edit");
 		Route::get("/admin-maestro-delete/{id}", 'destroy');
 	});
-
+	// rutas para edicion de Carreras
+	Route::controller(CarrerasController::class)->group(function () {
+		Route::get("/admin-carreras", 'index')->name('admin-carreras');
+		Route::get("/admin-carrera/create", 'create')->name('admin-carrera-create');
+		Route::post("/admin-carrera/create", 'store')->name('admin-carrera-create');
+		Route::get("/admin-carrera-edit/{id}", 'show');
+		Route::put("/admin-carrera-edit", 'update')->name("admin-carrera-edit");
+		Route::get("/admin-carrera-delete/{id}", 'destroy');
+	});
 	Route::get('admin-permisos', function () {
 		return view('admin.permisos');
 	})->name('admin-permisos');
