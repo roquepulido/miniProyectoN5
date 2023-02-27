@@ -25,7 +25,7 @@ class StudentFactory extends Factory
         return [
 
             'user_id' => $user->id,
-            'carrera_id' => null,
+            'carrera_id' => 1,
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'address' => fake()->address(),

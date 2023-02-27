@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Carreras;
+use App\Models\User;
 
 class StudentsController extends Controller
 {
@@ -14,11 +16,8 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        $students = Student::leftJoin('carreras', 'students.carrera_id', '=', 'carreras.id')
-            ->leftJoin('users', 'students.user_id', '=', 'users.id')
-            ->select('students.*', 'carreras.name', 'users.email')
-            ->get();
-        return view('admin.alumnos')
+        $students = Student::all();
+        return view('admin.alumnos.index')
             ->with('alumnos', $students);
     }
 
@@ -29,7 +28,8 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        return view("admin.alumnos.create");
+        $carreras = Carreras::all();
+        return view("admin.alumnos.create")->with("carreras", $carreras);
     }
 
     /**
@@ -40,7 +40,25 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::create([
+            'name' => $request->first_name . " " . $request->last_name,
+            'email' => $request->email,
+            'password' => ("$request->first_name")
+        ]);
+        $user->assignRole('student');
+
+        Student::create(
+            [
+                'user_id' => $user->id,
+                'carrera_id' => $request->carrera_id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'address' => $request->address,
+                'birth_date' => $request->birth_date,
+                'DNI' => $request->dni
+            ]
+        );
+        return redirect('admin-alumnos')->with('status', 'Estudiante Creado!');
     }
 
     /**
@@ -51,7 +69,9 @@ class StudentsController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = Student::find($id);
+        $carreras = Carreras::all();
+        return view("admin.alumnos.update")->with("alumno", $student)->with("carreras", $carreras);
     }
 
     /**

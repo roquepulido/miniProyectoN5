@@ -79,9 +79,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 	Route::controller(StudentsController::class)->group(function () {
 		Route::get("/admin-alumnos", 'index')->name('admin-alumnos');
 		Route::get("/admin-alumnos/create", 'create')->name('admin-alumno-create');
-		// Route::post("/product", 'store');
-		// Route::get("/product/{id}", 'show');
-		// Route::put("/product/{id}", 'update');
+		Route::post("/admin-alumnos/create", 'store')->name('admin-alumno-create');
+		Route::get("/admin-alumno-edit/{id}", 'show');
+		Route::put("/admin-alumno-edit", 'update')->name("admin-alumno-edit");
 		// Route::delete("/product/{id}", 'index');
 	});
 
