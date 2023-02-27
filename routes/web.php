@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 		Route::post("/admin-alumnos/create", 'store')->name('admin-alumno-create');
 		Route::get("/admin-alumno-edit/{id}", 'show');
 		Route::put("/admin-alumno-edit", 'update')->name("admin-alumno-edit");
-		// Route::delete("/product/{id}", 'index');
+		Route::get("/admin-alumno-delete/{id}", 'destroy');
 	});
 
 	Route::get('admin-permisos', function () {

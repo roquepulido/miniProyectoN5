@@ -95,14 +95,9 @@
                                             </td>
                                             <td class="align-middle">
                                                 <a href="./admin-alumno-edit/{{$alumno->id}}"
-                                                    class="text-secondary font-weight-bold text-xs mx-2"
-                                                    data-toggle="tooltip" data-original-title="Editar Estudiante">
+                                                    class="text-secondary font-weight-bold text-xs"
+                                                    data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
-                                                </a>
-                                                <a href="./admin-alumno-delete/{{$alumno->id}}"
-                                                    class="text-secondary font-weight-bold text-xs mx-2"
-                                                    data-toggle="tooltip" data-original-title="Borrar Estudiante">
-                                                    Borrar
                                                 </a>
                                             </td>
                                         </tr>

@@ -92,9 +92,22 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user = User::find($request->user_id);
+        $user->email = $request->email;
+        $user->save();
+
+        $student = Student::find($request->id);
+        $student->first_name = $request->first_name;
+        $student->last_name = $request->last_name;
+        $student->carrera_id = $request->carrera_id;
+        $student->address = $request->address;
+        $student->birth_date = $request->birth_date;
+        $student->DNI = $request->DNI;
+
+        $student->save();
+        return redirect('admin-alumnos')->with('status', 'Estudiante Actualizado!');
     }
 
     /**
@@ -105,6 +118,10 @@ class StudentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        $user = User::find($student->user_id);
+        $student->delete();
+        $user->delete();
+        return redirect('admin-alumnos')->with('status', 'Estudiante Elimonado!');
     }
 }
